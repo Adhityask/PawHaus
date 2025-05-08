@@ -1,0 +1,56 @@
+{%extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+
+<div class="col-md-9 mt-2 p-3">
+    <!-- Main Content -->
+    <div class="row">
+      <!-- Product Card Start -->
+      <div class="col-md-12 mt-4">
+        <div class="card shadow rounded-4 border-0">
+          <div class="row g-0">
+            <!-- Image Section -->
+            <div class="col-md-6">
+              <img src="{{ pet.img.url }}" alt="Pet Image" class="img-fluid rounded-start w-100 h-100 object-fit-cover">
+            </div>
+            <!-- Content Section -->
+            <div class="col-md-6 d-flex align-items-center">
+              <div class="card-body">
+                <!-- Pet Name -->
+                <h4 class="card-title fw-bold mb-2">{{ pet.name }}</h4>
+              
+                <!-- Pet Details (Breed & Type) -->
+                <p class="text-muted mb-1">
+                  <strong>Breed:</strong> {{ pet.breed }}
+                </p>
+                <p class="text-muted mb-1">
+                  <strong>Type:</strong> {{ pet.type }}
+                </p>
+                <p class="text-muted mb-1">
+                  <strong>age:</strong> {{ pet.age }}
+                </p>
+              
+                <!-- Pet Description -->
+                <p class="mb-3">
+                  <strong>Details:</strong> {{ pet.details }}
+                </p>
+              
+                <!-- Price -->
+                <h5 class="text-primary mb-3">Price: ₹{{ pet.price }}</h5>
+              
+                <!-- Add to Cart Button -->
+                <a href="/addtocart/{{ pet.id }}" class="btn btn-danger rounded-pill px-4">
+                  Add To Cart
+                </a>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+        
+      <!-- Product Card End -->
+    </div>
+  </div>
+        {% endblock 'main' %}

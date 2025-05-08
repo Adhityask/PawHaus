@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+<div class="col-md-10">
+  <div class="container py-4">
+    <div class="row justify-content-between">
+      <!-- Cart Items Section -->
+      <div class="col-md-7">
+        <h3 class="mb-4 text-primary fw-bold border-bottom pb-2">🛒 Cart Items</h3>
+
+        {% for cart in mycart %}
+        <div class="card mb-4 shadow-lg border-0">
+          <div class="row g-0 align-items-center">
+            <!-- Image -->
+            <div class="col-md-5">
+              <img src="{{ cart.pid.img.url }}" class="img-fluid rounded-start" alt="{{ cart.petid.name }}">
+            </div>
+
+            <!-- Details -->
+            <div class="col-md-7 p-3">
+              <h5 class="card-title fw-semibold">Name: {{ cart.pid.name }}</h5>
+              <h6 class="text-muted mb-2">Gender: {{ cart.pid.gender }}</h6>
+              <h6 class="text-muted mb-2">Age: ₹{{ cart.pid.age }}</h6>
+              <p class="card-text small text-secondary"><strong>Description:</strong> {{ cart.pid.details }}</p>
+              <h6 class="text-success mb-3">Price: ₹{{ cart.pid.price }}</h6>
+
+              <!-- Quantity Buttons -->
+              <div class="d-flex align-items-center mb-2">
+                {% if cart.quantity > 1 %}
+                <a href="/updatequantity/{{cart.id}}/decr" class="btn btn-outline-secondary btn-sm me-2">-</a>
+                {% endif %}
+                <span class="fw-bold mx-2">Qty: {{ cart.quantity }}</span>
+                <a href="/updatequantity/{{cart.id}}/incr" class="btn btn-outline-secondary btn-sm ms-2">+</a>
+              </div>
+
+              <a href="/removeCart/{{ cart.id }}" class="btn btn-danger btn-sm">Remove from Cart</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Summary Section -->
+      <div class="col-md-4">
+        <div class="card shadow-sm border-0 p-4">
+          <h4 class="text-center text-primary mb-3">🧾 Order Summary</h4>
+          <hr>
+      
+          {% if count == 0 %}
+            <div class="text-center">
+              <p class="text-muted">Your cart is empty.</p>
+              <a href="/" class="btn btn-outline-primary">Continue Shopping</a>
+            </div>
+          {% else %}
+            <h5 class="mb-3"><strong>Total Items:</strong> {{ count }}</h5>
+            <h5><strong>Total Bill:</strong> ₹{{ totalBill }}</h5>
+      
+            {% if applied_coupon %}
+              <p style="color: green;">Coupon <strong>{{ coupon_code }}</strong> applied! ₹{{ totalBill|add:discount }} → ₹{{ totalBill }}</p>
+      
+              <form method="post" action="/apply-coupon/">
+                {% csrf_token %}
+                <button type="submit" name="action" value="remove" class="btn btn-danger btn-sm">Remove Coupon</button>
+              </form>
+            {% else %}
+              <form method="post" action="/apply-coupon/">
+                {% csrf_token %}
+                <div class="input-group mt-3">
+                  <input type="text" name="coupon_code" class="form-control" placeholder="Enter Coupon Code" aria-label="Coupon Code">
+                  <button class="btn btn-outline-primary" type="submit" name="action" value="apply">Apply</button>
+                </div>
+              </form>
+            {% endif %}
+      
+            {% if error %}
+              <div class="alert alert-danger mt-3 text-center">
+                {{ error }}
+              </div>
+            {% elif applied_coupon %}
+              <div class="alert alert-success mt-3 text-center">
+                Coupon applied successfully!
+              </div>
+            {% elif coupon_attempted %}
+              <div class="alert alert-danger mt-3 text-center">
+                Invalid coupon code. Please try again.
+              </div>
+            {% endif %}
+      
+            <div class="mt-4 text-center">
+              <a href="/confirmorder"><button class="btn btn-success w-100">Confirm Order</button></a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      
+
+    </div>
+  </div>
+</div>
+
+{% endblock 'main' %}

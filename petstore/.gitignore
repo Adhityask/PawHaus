@@ -1,0 +1,24 @@
+# Python
+*.pyc
+__pycache__/
+
+# Virtual environment
+env/
+venv/
+.myenv/
+
+# VS Code settings (optional)
+.vscode/
+
+# Django
+*.log
+local_settings.py
+
+
+# Media files (optional)
+media/
+staticfiles/
+
+# OS
+.DS_Store
+Thumbs.db
