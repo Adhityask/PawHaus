@@ -1,8 +1,13 @@
-
-
 # PawHaus - PetStore
 
 **PawHaus** is an online pet store where users can browse, add pets to the cart, and make secure payments through **Razorpay**. It's a fully-functional Django application that provides a seamless shopping experience for pet lovers.
+
+## 🚀 Live Demo
+
+Check out the live application here:  
+👉 [PawHaus Live Demo](https://petstorebyadhityask14.pythonanywhere.com/)
+
+---
 
 ## Features
 
@@ -10,7 +15,7 @@
 - **Browse Pets**: Users can browse through available pets in different categories.
 - **Add to Cart**: Users can add pets to the cart and proceed to checkout.
 - **Secure Payment via Razorpay**: Integrated Razorpay for secure payments.
-- **Admin Panel**: Admins can manage pet listings, users, and orders.
+- **Admin Panel(Built-In)**: Admins can manage pet listings, users, and orders.
 
 ## Table of Contents
 - [Installation Guide](#installation-guide)
