@@ -385,7 +385,8 @@ def makePayment(request):
 
     totalBill= request.session.get('totalBill',None)
     # totalBill = sum(cart.pid.price * cart.quantity for cart in data)
-    client = razorpay.Client(auth=("rzp_test_uWbBTFmHqIi9dN","6EV65YVkhZTGRmAlqLhpsWl2"))
+    client = razorpay.Client(auth=("YOUR_KEY_ID", "YOUR_SECRET_KEY"))
+
     
     data = {
         'amount': int(totalBill) * 100,
